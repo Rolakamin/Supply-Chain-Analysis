@@ -34,7 +34,7 @@ Among the 15 suppliers, determine which ones are most frequently associated with
 The goal is to highlight suppliers whose products are consistently involved in fulfillment breakdowns and may require closer management or escalation.
 
 
-### 📊 Dataset Summary
+### Dataset Summary
 
 The dataset consists of **five interrelated tables**, covering customer details, product inventory, supplier information, and order transactions. Together, they support end-to-end analysis of the supply chain, with a particular focus on **Port Harcourt** market fulfillment.
 
