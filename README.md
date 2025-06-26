@@ -34,6 +34,19 @@ Among the 15 suppliers, determine which ones are most frequently associated with
 The goal is to highlight suppliers whose products are consistently involved in fulfillment breakdowns and may require closer management or escalation.
 
 
+### 📊 Dataset Summary
+
+The dataset consists of **five interrelated tables**, covering customer details, product inventory, supplier information, and order transactions. Together, they support end-to-end analysis of the supply chain, with a particular focus on **Port Harcourt** market fulfillment.
+
+| Table Name     | Description                                                   | Rows    | Columns |
+|----------------|---------------------------------------------------------------|---------|---------|
+| `Customers`    | Customer profiles including registration date, location, and segment     | 15,212  | 12      |
+| `Orders`       | All order-level data, including delivery dates, payment info, and shipping location | 75,000  | 19      |
+| `OrderItems`   | Line-item details for each order, including product, quantity, and return status   | 163,750 | 7       |
+| `Products`     | Product catalog with pricing, inventory level, category, and status      | 200     | 9       |
+| `Suppliers`    | Information on 15 suppliers including contact info, rating, and business region     | 15      | 8       |
+
+
 
 
 
