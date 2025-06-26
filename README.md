@@ -20,15 +20,15 @@ especially for shipments to Port Harcourt and surrounding areas, despite the hig
 
 **2. Assess the Impact on Recent Customer Cohorts**
 
-Determine whether fulfillment issues, such as **significant delivery delays** (where `ActualDeliveryDate` far exceeds `ExpectedDeliveryDate`) or **high cancellation rates**, are affecting new customers (those  who registered after **March 1, 2024**) more than existing ones.  
+Determine whether fulfillment issues, such as **significant delivery delays** (where **ActualDeliveryDate** far exceeds **ExpectedDeliveryDate**) or **high cancellation rates**, are affecting new customers (those  who registered after **March 1, 2024**) more than existing ones.  
 Also, assess whether these fulfillment challenges are correlated with **lower initial repeat purchase rates** among this new customer segment.
 
  **3. Identify Supplier-Related Fulfillment Constraints**  
  
 Among the 15 suppliers, determine which ones are most frequently associated with products that:
  
-- Are often **out of stock** or have low inventory (`StockQuantity`)
-- Have a high number of **returns**, suggesting potential quality issues (`ReturnStatus`)
+- Are often **out of stock** or have low inventory (**StockQuantity**)
+- Have a high number of **returns**, suggesting potential quality issues (**ReturnStatus**)
 - Contribute to **cancellations or failed deliveries**, particularly for shipments to **Port Harcourt**
 
 The goal is to highlight suppliers whose products are consistently involved in fulfillment breakdowns and may require closer management or escalation.
