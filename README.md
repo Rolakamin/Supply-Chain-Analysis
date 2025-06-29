@@ -46,6 +46,28 @@ The dataset consists of **five interrelated tables**, covering customer details,
 | `Products`     | Product catalog with pricing, inventory level, category, and status      | 200     | 9       |
 | `Suppliers`    | Information on 15 suppliers including contact info, rating, and business region     | 15      | 8       |
 
+## Data Dictionary 
+
+### Customers Table
+
+| Column Name       | Description                                                |
+|-------------------|------------------------------------------------------------|
+| CustomerID        | Unique identifier for each customer                        |
+| FirstName         | Customer’s first name                                      |
+| LastName          | Customer’s last name                                       |
+| Email             | Customer's email address                                   |
+| Address           | Full residential/street address                            |
+| City              | Customer’s city (e.g., Lagos, Port Harcourt)               |
+| PostalCode        | Postal/zip code                                            |
+| RegistrationDate  | Date the customer registered on the platform               |
+| LastLoginDate     | Timestamp of the most recent login                         |
+| CustomerSegment   | Loyalty or marketing segment (e.g., Gold, New, VIP)        |
+| DateOfBirth       | Customer’s birth date                                      |
+| Phone             | Customer’s phone number                                    |
+
+
+
+
 
 
 
