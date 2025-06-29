@@ -46,7 +46,9 @@ The dataset consists of **five interrelated tables**, covering customer details,
 | `Products`     | Product catalog with pricing, inventory level, category, and status      | 200     | 9       |
 | `Suppliers`    | Information on 15 suppliers including contact info, rating, and business region     | 15      | 8       |
 
+
 ## Data Dictionary 
+
 
 ### Customers Table
 
@@ -64,6 +66,34 @@ The dataset consists of **five interrelated tables**, covering customer details,
 | CustomerSegment   | Loyalty or marketing segment (e.g., Gold, New, VIP)        |
 | DateOfBirth       | Customer’s birth date                                      |
 | Phone             | Customer’s phone number                                    |
+
+
+### Orders Table
+
+| Column Name            | Description                                                              |
+|------------------------|--------------------------------------------------------------------------|
+| OrderID                | Unique identifier for each order                                        |
+| CustomerID             | ID of the customer who placed the order                                 |
+| OrderDate              | Date the order was placed                                               |
+| ShipDate               | Date the order was shipped (if applicable)                              |
+| ExpectedDeliveryDate   | Date the order was expected to be delivered                             |
+| ActualDeliveryDate     | Date the order was actually delivered (if delivered)                    |
+| OrderStatus            | Current status of the order (e.g., Delivered, Canceled, Returned)       |
+| ShippingMethod         | Delivery method used (e.g., Standard, Express, Local Pickup)            |
+| ShippingCost           | Cost of shipping (in Nigerian Naira - NGN)                              |
+| ShippingAddress        | Full shipping address                                                   |
+| ShippingCity           | City where the order was shipped                                        |
+| ShippingState          | State where the order was shipped                                       |
+| ShippingPostalCode     | Postal code of the delivery address                                     |
+| ShippingCountry        | Country of the delivery address (typically Nigeria)                     |
+| PaymentMethod          | Payment method used by the customer (e.g., Card, Bank Transfer)         |
+| PaymentStatus          | Status of payment (e.g., Paid, Failed, Pending)                         |
+| DiscountCode           | Discount or promo code applied to the order (if any)                    |
+| DiscountAmount         | Value of the discount applied (in NGN)                                  |
+| TotalAmount            | Total amount of the order after discounts (in NGN)                      |
+
+
+
 
 
 
