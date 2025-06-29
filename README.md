@@ -50,6 +50,7 @@ The dataset consists of **five interrelated tables**, covering customer details,
 ## Data Dictionary 
 
 
+
 ### Customers Table
 
 | Column Name       | Description                                                |
@@ -66,6 +67,7 @@ The dataset consists of **five interrelated tables**, covering customer details,
 | CustomerSegment   | Loyalty or marketing segment (e.g., Gold, New, VIP)        |
 | DateOfBirth       | Customer’s birth date                                      |
 | Phone             | Customer’s phone number                                    |
+
 
 
 ### Orders Table
@@ -91,6 +93,52 @@ The dataset consists of **five interrelated tables**, covering customer details,
 | DiscountCode           | Discount or promo code applied to the order (if any)                    |
 | DiscountAmount         | Value of the discount applied (in NGN)                                  |
 | TotalAmount            | Total amount of the order after discounts (in NGN)                      |
+
+
+
+### OrderItems Table
+
+ | Column Name        | Description                                                              |
+|--------------------|--------------------------------------------------------------------------|
+| OrderItemID        | Unique identifier for each order line item                              |
+| OrderID            | ID of the order this item belongs to                                     |
+| ProductID          | ID of the product purchased                                              |
+| Quantity           | Number of units of the product ordered                                   |
+| UnitPrice          | Price of a single unit at the time of purchase (in NGN)                  |
+| TotalItemPrice     | Total price for the item (Quantity × UnitPrice)                          |
+| ReturnStatus       | Status of the item return (e.g., Returned, Not Returned, Approved)       |
+
+
+
+### Products Table
+
+| Column Name      | Description                                                              |
+|------------------|--------------------------------------------------------------------------|
+| ProductID        | Unique identifier for each product                                       |
+| ProductName      | Name or title of the product                                             |
+| Category         | Product category (e.g., Health & Beauty, Electronics)                    |
+| SupplierID       | ID of the supplier providing the product                                 |
+| UnitPrice        | Price per unit of the product (in NGN)                                   |
+| StockQuantity    | Current quantity in stock                                                |
+| ProductStatus    | Status of the product (e.g., Active, Discontinued, OutOfStock)           |
+| LaunchDate       | Date the product was launched or made available                          |
+| Weight           | Product weight in kilograms (kg)                                         |
+
+
+
+### Suppliers Table
+
+| Column Name       | Description                                                              |
+|-------------------|--------------------------------------------------------------------------|
+| SupplierID        | Unique identifier for each supplier                                      |
+| SupplierName      | Name of the supplier or company                                          |
+| Country           | Country where the supplier is located                                    |
+| Region            | Global region (e.g., Africa, Europe, North America)                      |
+| ContactEmail      | Supplier’s primary email contact                                         |
+| Phone             | Supplier’s phone number                                                  |
+| YearsInBusiness   | Number of years the supplier has been in operation                       |
+| SupplierRating    | Supplier's performance rating or quality tier (e.g., 5-star, Awaiting)   |
+
 
 
 
