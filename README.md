@@ -178,6 +178,146 @@ let phone = Text.Trim([Phone]) in
 
 - Deleted original uncleaned columns and renamed the cleaned versions to their original names for consistency.
 
+### Orders Table
+
+- **Trimmed text columns** such as **OrderID** and **CustomerID** to remove leading and trailing spaces.
+
+#### Date Fields — Parsing Inconsistent Formats
+
+Many of the date fields were stored as **text** in inconsistent formats (e.g., **03/01/2024**, **2024-03-01 13:59**, **20240301120500**, **Invalid Date String**).  
+To ensure these columns could be queried properly in SQL, they were **parsed and converted to valid **Date types** using Power Query.
+
+---
+
+##### 🔹 `OrderDate` Cleaning Steps:
+- The `OrderDate` column was duplicated.
+- A custom column was created using:
+
+```powerquery
+try DateTime.FromText([ParsedOrderDate])
+```
+
+- The resulting record was expanded to extract the `Value` field.
+- Converted to **Date only** (removed time).
+- The original column was removed to retain only the cleaned version.
+
+> ✅ **Parsing** means converting from unstructured text into a valid date format.
+
+---
+
+##### 🔹 `ShipDate` and `ActualDeliveryDate`:
+- Followed the same process:
+  1. Duplicate the column.
+  2. Add a custom column:
+  ```powerquery
+  try DateTime.FromText([Column])
+  ```
+  3. Expand the `Record` to get the `Value`.
+  4. Convert to `Date only`.
+  5. Remove the original unparsed column.
+
+- This safely handled invalid formats and left `null` where conversion failed.
+
+---
+
+#### 📦 OrderStatus
+
+- `OrderStatus` values had inconsistent casing and naming like `"DELIVERED_v2"`, `"processing"`, `"Canceled (old)"`.
+- Cleaned by trimming and converting to lowercase, then normalizing using:
+
+```powerquery
+let status = Text.Lower(Text.Trim([OrderStatus])) in
+    if Text.Contains(status, "cancel") then "Canceled" else
+    if Text.Contains(status, "deliver") then "Delivered" else
+    if Text.Contains(status, "partially shipped") then "Partially Shipped" else
+    if Text.Contains(status, "pending") then "Pending" else
+    if Text.Contains(status, "processing") then "Processing" else
+    if Text.Contains(status, "returned") then "Returned" else
+    if Text.Contains(status, "shipped") then "Shipped" else status
+```
+
+---
+
+#### 🚚 ShippingMethod
+
+- Contained inconsistent formats like `"Express (Lagos/PH/Abuja)_v2"`, `"std."`, `"LOCAL PICKUP (PH ONLY)"`.
+- Trimmed and converted to lowercase, then cleaned using:
+
+```powerquery
+let method = Text.Lower(Text.Trim([ShippingMethod])) in
+    if Text.Contains(method, "express") then "Express" else
+    if Text.Contains(method, "pickup") then "Local Pickup" else
+    if Text.Contains(method, "interstate") then "Interstate Bus" else
+    if Text.Contains(method, "standard") or method = "std" or method = "std." then "Standard" else
+    if Text.Contains(method, "regular") then "Regular" else method
+```
+
+---
+
+#### 💰 ShippingCost
+
+- Column was renamed from `ShippingCost_NGN` to `ShippingCost` for SQL compatibility.
+
+---
+
+#### 🏠 Address Fields
+
+- `ShippingAddress`, `ShippingCity`, `ShippingState`, and `ShippingCountry` were trimmed for whitespace.
+- `ShippingPostalCode` was converted from **Whole Number** to **Text** to preserve formatting and prevent loss of leading zeros.
+
+---
+
+#### 💳 PaymentMethod
+
+- Trimmed and lowercased.
+- Cleaned using a formula to map variants like `"card (paystack/flutterwave)"`, `"ussd_v2"` into standardized values:
+
+```powerquery
+let method = Text.Lower(Text.Trim([PaymentMethod])) in
+    if Text.Contains(method, "bank transfer") then "Bank Transfer" else
+    if Text.Contains(method, "card") then "Card" else
+    if Text.Contains(method, "cash") then "Cash on Delivery" else
+    if Text.Contains(method, "credit card") then "Credit Card" else
+    if Text.Contains(method, "paypal") then "PayPal" else
+    if Text.Contains(method, "ussd") then "USSD" else method
+```
+
+---
+
+#### 📌 PaymentStatus
+
+- Cleaned similarly using this formula:
+
+```powerquery
+let status = Text.Lower(Text.Trim([PaymentStatus])) in
+    if Text.Contains(status, "authorized") then "Authorized" else
+    if Text.Contains(status, "failed") then "Failed" else
+    if Text.Contains(status, "paid") then "Paid" else
+    if Text.Contains(status, "pending payment") then "Pending Payment" else
+    if Text.Contains(status, "refunded") then "Refunded" else status
+```
+
+---
+
+#### 🎁 DiscountCode
+
+- Over **63,000 rows** were blank or null. These were preserved as-is to support future analysis of discount usage.
+
+---
+
+#### 💸 DiscountAmount
+
+- Renamed from `DiscountAmount_NGN` to `DiscountAmount`.
+- Null values were **retained** to preserve accurate discount history.
+
+---
+
+#### 📊 TotalAmount
+
+- Renamed from `TotalAmount_NGN` to `TotalAmount`.
+- **Rows with `null` or `0`** were preserved to allow analysis of incomplete or zero-value transactions (e.g., test orders or fully discounted purchases).
+
+
 
 
 
