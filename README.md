@@ -306,7 +306,7 @@ let status = Text.Lower(Text.Trim([PaymentStatus])) in
 #### TotalAmount
 
 - Renamed from **TotalAmount_NGN** to **TotalAmount**.
-- **Rows with **null or 0** values in the **TotalAmount** column were retained to allow for future analysis of incomplete purchases, fully discounted orders, or potential internal test transactions that may have been entered during system testing or data setup.
+- Rows with **null or 0** values in the **TotalAmount** column were retained to allow for future analysis of incomplete purchases, fully discounted orders, or potential internal test transactions that may have been entered during system testing or data setup.
 
 
 
