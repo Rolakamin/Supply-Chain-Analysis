@@ -141,6 +141,49 @@ The dataset consists of **five interrelated tables**, covering customer details,
 
 
 
+## Data Cleaning
+
+The dataset underwent light cleaning and transformation using **Excel Power Query** before being imported into **Microsoft SQL Server**.  
+The objective was to address obvious inconsistencies, normalize formats, and prepare the data for SQL-based analysis, while deferring complex validation, such as invalid dates, duplicate records, and outlier detection, as well as business rule–driven filtering, to SQL.
+
+### Customers Table
+
+-- Trimmed all text fields to remove leading/trailing spaces (e.g., **CustomerID**, **Email**, **City**).
+
+-- Standardized **CustomerSegment** values (e.g., variants like **gold**, **GOLD_v2**, **Gold (old)** were normalized to **Gold)**. A custom column was created to normalize the categories using the following Power Query formula:
+
+ ```
+let segment = Text.Lower(Text.Trim([CustomerSegment])) in
+    if Text.StartsWith(segment, "bronze") then "Bronze" else
+    if Text.StartsWith(segment, "silver") then "Silver" else
+    if Text.StartsWith(segment, "gold") then "Gold" else
+    if Text.StartsWith(segment, "platinum") then "Platinum" else
+    if Text.StartsWith(segment, "standard") or segment = "std." then "Standard" else
+    if Text.StartsWith(segment, "vip") then "VIP" else
+    if Text.StartsWith(segment, "new") then "New" else
+    if segment = "regular" then "Standard" else segment
+```
+
+-- Replaced placeholder dates **(1/1/1900)** in **DateOfBirth** with **null** using **Replace Value** function.
+
+-- Cleaned Phone column, which had mixed formats like **+1-673-409-0301x078**, **(854)220-2272**, **-1643**, **10278**, etc.
+A custom formula was used to remove negative and whitespace-only numbers:
+
+```
+let phone = Text.Trim([Phone]) in
+    if phone = "" or Text.StartsWith(phone, "-") then null else phone
+```
+
+-- Preserved all null and blank values in fields like Email, PostalCode, LastLoginDate, DateOfBirth, and Phone for downstream handling in SQL.
+
+-- Deleted original uncleaned columns and renamed the cleaned versions to their original names for consistency.
+
+
+
+
+
+
+
 
 
 
