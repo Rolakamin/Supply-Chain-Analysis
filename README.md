@@ -298,7 +298,7 @@ let status = Text.Lower(Text.Trim([PaymentStatus])) in
 
 #### DiscountAmount
 
-- Renamed from 8DiscountAmount_NGN** to `DiscountAmount`.
+- Renamed from **DiscountAmount_NGN** to `DiscountAmount`.
 - Null values were retained to preserve accurate discount history.
 
 ---
