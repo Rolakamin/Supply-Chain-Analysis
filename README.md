@@ -308,6 +308,16 @@ let status = Text.Lower(Text.Trim([PaymentStatus])) in
 - Renamed from **TotalAmount_NGN** to **TotalAmount**.
 - Rows with **null or 0** values in the **TotalAmount** column were retained to allow for future analysis of incomplete purchases, fully discounted orders, or potential internal test transactions that may have been entered during system testing or data setup.
 
+### OrderItems Table 
+
+- Text columns such as **OrderItemID**, **OrderID**, **ProductID**, and **ReturnStatus** were trimmed to remove leading or trailing whitespace. This ensures clean joins, consistent filtering, and accurate matching during analysis.
+
+- The columns **UnitPriceAtPurchase_NGN** and **TotalItemPrice_NGN** were renamed to **UnitPriceAtPurchase** and **TotalItemPrice** respectively for naming consistency and SQL compatibility.
+
+- Null values in the **ReturnStatus** column were retained to allow analysis of return behavior later in SQL (e.g., to distinguish between returned, approved, or unprocessed items).
+
+- **Negative** or **zero** values in the **Quantity** column were not flagged or filtered in Power Query. These edge cases were left intact for downstream validation in SQL,possibly indicating errors, cancellations, or system test records.
+
 
 
 
