@@ -318,6 +318,73 @@ let status = Text.Lower(Text.Trim([PaymentStatus])) in
 
 - **Negative** or **zero** values in the **Quantity** column were not flagged or filtered in Power Query. These edge cases were left intact for downstream validation in SQL,possibly indicating errors, cancellations, or system test records.
 
+### Products Table
+
+- Trimmed text columns such as `ProductID`, `ProductName`, and `Category` to remove leading and trailing spaces.
+  
+- Standardized category names using the transformation:
+  ```
+  Text.Proper(Text.Trim([Category]))
+  to fix inconsistent casing (e.g., local crafts, Local Crafts) and remove duplicates caused by trailing spaces.
+
+- Replaced versioned entries using Replace Values, such as:
+
+"Automotive Parts (Old)" → "Automotive Parts"
+
+- Standardized values in ProductStatus using Replace Values, e.g.:
+
+"active" → "Active"
+
+"Active_v2" → "Active"
+
+- Converted LaunchDate column from text to date following the steps below:
+  
+1. Duplicated the column as ParsedLaunchDate
+2. Applied:
+ ```  
+    try Date.FromText([ParsedLaunchDate])
+```
+3. Extracted Value from the result
+4. Changed data type to Date
+5. Replaced the original LaunchDate column
+
+- Renamed **UnitPrice_NGN** column to **UnitPrice**.
+
+- **Null and negative values** in **UnitPrice**, **StockQuantity**, and **Weight** were retained for further analysis in SQL.
+
+### Suppliers Table
+
+- Trimmed text columns: SupplierID, SupplierName, Country, Region, ContactEmail, and Phone.
+
+- Normalized inconsistent values in the SupplierRating column by creating a new column **NormalizedRating** with the following formula:
+
+```
+let rating = Text.Lower(Text.Trim([SupplierRating])) in
+    if rating = "" then "" else
+    if Text.Contains(rating, "1") then "1" else
+    if Text.Contains(rating, "2") then "2" else
+    if Text.Contains(rating, "3") then "3" else
+    if Text.Contains(rating, "4") then "4" else
+    if Text.Contains(rating, "5") then "5" else
+    if Text.Contains(rating, "awaiting") then "Awaiting Rating" else rating
+```
+- Deleted the original SupplierRating column
+
+- Renamed **NormalizedRating** to **SupplierRating**
+
+- Removed negative or invalid phone numbers; retained entries with mixed valid formats.
+
+- Null values in **Region**, **Phone**, and **YearsInBusiness** were left for downstream handling in SQL.
+
+
+  
+
+
+
+
+
+  
+
 
 
 
