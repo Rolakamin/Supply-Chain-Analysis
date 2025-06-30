@@ -148,9 +148,9 @@ The objective was to address obvious inconsistencies, normalize formats, and pre
 
 ### Customers Table
 
--- Trimmed all text fields to remove leading/trailing spaces (e.g., **CustomerID**, **Email**, **City**).
+- Trimmed all text fields to remove leading/trailing spaces (e.g., **CustomerID**, **Email**, **City**).
 
--- Standardized **CustomerSegment** values (e.g., variants like **gold**, **GOLD_v2**, **Gold (old)** were normalized to **Gold)**. A custom column was created to normalize the categories using the following Power Query formula:
+- Standardized **CustomerSegment** values (e.g., variants like **gold**, **GOLD_v2**, **Gold (old)** were normalized to **Gold)**. A custom column was created to normalize the categories using the following Power Query formula:
 
  ```
 let segment = Text.Lower(Text.Trim([CustomerSegment])) in
@@ -164,9 +164,9 @@ let segment = Text.Lower(Text.Trim([CustomerSegment])) in
     if segment = "regular" then "Standard" else segment
 ```
 
--- Replaced placeholder dates **(1/1/1900)** in **DateOfBirth** with **null** using **Replace Value** function.
+- Replaced placeholder dates **(1/1/1900)** in **DateOfBirth** with **null** using **Replace Value** function.
 
--- Cleaned Phone column, which had mixed formats like **+1-673-409-0301x078**, **(854)220-2272**, **-1643**, **10278**, etc.
+- Cleaned Phone column, which had mixed formats like **+1-673-409-0301x078**, **(854)220-2272**, **-1643**, **10278**, etc.
 A custom formula was used to remove negative and whitespace-only numbers:
 
 ```
@@ -174,9 +174,9 @@ let phone = Text.Trim([Phone]) in
     if phone = "" or Text.StartsWith(phone, "-") then null else phone
 ```
 
--- Preserved all null and blank values in fields like Email, PostalCode, LastLoginDate, DateOfBirth, and Phone for downstream handling in SQL.
+- Preserved all null and blank values in fields like Email, PostalCode, LastLoginDate, DateOfBirth, and Phone for downstream handling in SQL.
 
--- Deleted original uncleaned columns and renamed the cleaned versions to their original names for consistency.
+- Deleted original uncleaned columns and renamed the cleaned versions to their original names for consistency.
 
 
 
