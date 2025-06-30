@@ -148,7 +148,7 @@ The objective was to address obvious inconsistencies, normalize formats, and pre
 
 ### Customers Table
 
---Trimmed all text fields to remove leading/trailing spaces (e.g., **CustomerID**, **Email**, **City**).
+-- Trimmed all text fields to remove leading/trailing spaces (e.g., **CustomerID**, **Email**, **City**).
 
 -- Standardized **CustomerSegment** values (e.g., variants like **gold**, **GOLD_v2**, **Gold (old)** were normalized to **Gold)**. A custom column was created to normalize the categories using the following Power Query formula:
 
