@@ -376,6 +376,22 @@ let rating = Text.Lower(Text.Trim([SupplierRating])) in
 
 - Null values in **Region**, **Phone**, and **YearsInBusiness** were left for downstream handling in SQL.
 
+## Data Import to Microsoft SQL Server
+
+After light cleaning in Excel Power Query, each table was exported as a **.csv** file and imported into **Microsoft SQL Server** using the **Import Flat File Wizard**.
+
+During the import process:
+
+- Column data types were reviewed and adjusted (e.g., **Date**, **Decimal(18,2)**, **VARCHAR**, **INT**).
+
+- Fields with missing values (e.g., **Phone**, **LastLoginDate**, **TotalAmount**) were set to Allow **Nulls**.
+
+- **Primary key columns** such as **CustomerID**, **OrderID**, **OrderItemID**, and **ProductID** were not allowed to contain nulls, ensuring data integrity.
+
+- After loading, row counts were validated to confirm successful import.
+
+This process ensured the dataset was structurally sound and ready for querying.
+
 
   
 
