@@ -392,6 +392,21 @@ During the import process:
 
 This process ensured the dataset was structurally sound and ready for querying.
 
+## Data Exploration & Validation
+
+After importing the lightly cleaned data into Microsoft SQL Server, an initial exploration was conducted to validate the integrity and quality of the dataset before performing analysis.
+
+### Row Count Verification
+
+The number of rows in each table were checked to confirm that they match expected values from the original data (as cleaned in Power Query)
+
+```
+SELECT COUNT(*) AS TotalCustomers FROM Customers;
+SELECT COUNT(*) AS TotalOrders FROM Orders;
+SELECT COUNT(*) AS TotalOrderItems FROM OrderItems;
+SELECT COUNT(*) AS TotalProducts FROM Products;
+SELECT COUNT(*) AS TotalSuppliers FROM Suppliers;
+```
 
   
 
