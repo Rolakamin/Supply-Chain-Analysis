@@ -398,7 +398,7 @@ After importing the lightly cleaned data into Microsoft SQL Server, an initial e
 
 ### Row Count Verification
 
-The number of rows in each table were checked to confirm that they match expected values from the original data (as cleaned in Power Query)
+Checked the number of rows in each table to confirm they match expected values from the original data (as cleaned in Power Query):
 
 ```
 SELECT COUNT(*) AS TotalCustomers FROM Customers;
@@ -407,6 +407,21 @@ SELECT COUNT(*) AS TotalOrderItems FROM OrderItems;
 SELECT COUNT(*) AS TotalProducts FROM Products;
 SELECT COUNT(*) AS TotalSuppliers FROM Suppliers;
 ```
+
+### Null Value Checks
+
+Identified whether key fields that should always have values (e.g., primary keys, dates, quantities) contain any missing values:
+
+-- Primary Key Fields 
+
+```
+SELECT COUNT(*) FROM Customers WHERE CustomerID IS NULL;
+SELECT COUNT(*) FROM Orders WHERE OrderID IS NULL;
+SELECT COUNT(*) FROM OrderItems WHERE OrderItemID IS NULL;
+```
+- **These returned 0**
+
+
 
   
 
