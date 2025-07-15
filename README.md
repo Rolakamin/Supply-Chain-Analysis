@@ -408,6 +408,8 @@ SELECT COUNT(*) AS TotalProducts FROM Products;
 SELECT COUNT(*) AS TotalSuppliers FROM Suppliers;
 ```
 
+- **The number of rows in each table matched expected values from the original data: Totalcustomers (15212), TotalOrders(75000), TotalOrderItems(163750), TotalProducts(200), TotalSuppliers(15)**
+
 ### Null Value Checks
 
 Identified whether key fields that should always have values (e.g., primary keys, dates, quantities) contain any missing values:
@@ -419,7 +421,15 @@ SELECT COUNT(*) FROM Customers WHERE CustomerID IS NULL;
 SELECT COUNT(*) FROM Orders WHERE OrderID IS NULL;
 SELECT COUNT(*) FROM OrderItems WHERE OrderItemID IS NULL;
 ```
-- **These returned 0**
+- **These queries returned 0**
+
+### Key Business Fields
+
+```
+SELECT COUNT(*) FROM Orders WHERE OrderDate IS NULL;
+SELECT COUNT(*) FROM Orders WHERE TotalAmount IS NULL;
+SELECT COUNT(*) FROM OrderItems WHERE Quantity IS NULL;
+```
 
 
 
