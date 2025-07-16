@@ -408,7 +408,13 @@ SELECT COUNT(*) AS TotalProducts FROM Products;
 SELECT COUNT(*) AS TotalSuppliers FROM Suppliers;
 ```
 
-- **The number of rows in each table matched expected values from the original data: Totalcustomers (15212), TotalOrders(75000), TotalOrderItems(163750), TotalProducts(200), TotalSuppliers(15)**
+- **The number of rows in each table matched expected values from the original data confirming complete importation. Results:  Totalcustomers (15212), TotalOrders(75000), TotalOrderItems(163750), TotalProducts(200), TotalSuppliers(15)**
+
+
+ Checked whether any foreign keys were missing (e.g., Orders without CustomerID, or OrderItems without ProductID)
+
+
+
 
 ### Null Value Checks
 
@@ -430,6 +436,8 @@ SELECT COUNT(*) FROM Orders WHERE OrderDate IS NULL;
 SELECT COUNT(*) FROM Orders WHERE TotalAmount IS NULL;
 SELECT COUNT(*) FROM OrderItems WHERE Quantity IS NULL;
 ```
+
+
 
 
 
