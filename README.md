@@ -408,50 +408,68 @@ SELECT COUNT(*) AS TotalProducts FROM Products;
 SELECT COUNT(*) AS TotalSuppliers FROM Suppliers;
 ```
 
-- **The number of rows in each table matched expected values from the original data confirming complete importation. Results:  Totalcustomers (15212), TotalOrders(75000), TotalOrderItems(163750), TotalProducts(200), TotalSuppliers(15)**
+- **The number of rows in each table matched expected values from the original data, confirming complete importation. Results:  Totalcustomers (15212), TotalOrders(75000), TotalOrderItems(163750), TotalProducts(200), TotalSuppliers(15)**
 
+###  Primary Key Integrity Checks
 
- Checked whether any foreign keys were missing (e.g., Orders without CustomerID, or OrderItems without ProductID)
-
-
-
-
-### Null Value Checks
-
-Identified whether key fields that should always have values (e.g., primary keys, dates, quantities) contain any missing values:
-
--- Primary Key Fields 
+Verified the primary key columns for nulls
 
 ```
 SELECT COUNT(*) FROM Customers WHERE CustomerID IS NULL;
 SELECT COUNT(*) FROM Orders WHERE OrderID IS NULL;
 SELECT COUNT(*) FROM OrderItems WHERE OrderItemID IS NULL;
 ```
-- **These queries returned 0**
 
-### Key Business Fields
+- **All primary key fields returned 0 NULLs, confirming primary key integrity**
+
+### Foreign Key Sanity Checks 
+
+Checked whether any foreign keys were missing (e.g., Orders without CustomerID, or OrderItems without ProductID)
 
 ```
-SELECT COUNT(*) FROM Orders WHERE OrderDate IS NULL;
-SELECT COUNT(*) FROM Orders WHERE TotalAmount IS NULL;
-SELECT COUNT(*) FROM OrderItems WHERE Quantity IS NULL;
+SELECT COUNT(*) AS NullCustomerID FROM Orders WHERE CustomerID IS NULL;
+SELECT COUNT(*) AS NullProductID FROM OrderItems WHERE ProductID IS NULL;
 ```
+- **Both checks returned 0, confirming valid relational structure**
+
+###  Null Value Detection in Key Business Fields
+
+Examined key business-critical fields that should not be null under normal operations.
+
+```
+-- Orders
+SELECT COUNT(*) AS NullOrderDate FROM Orders WHERE OrderDate IS NULL;
+SELECT COUNT(*) AS NullTotalAmount FROM Orders WHERE TotalAmount IS NULL;
+
+-- OrderItems
+SELECT COUNT(*) AS NullQuantity FROM OrderItems WHERE Quantity IS NULL;
+```
+- **Output: OrderDate(3,659 nulls), TotalAmount(679 nulls), Quantity (0 nulls).These rows were retained for further analysis. Null OrderDate or TotalAmount may represent incomplete, test, or cancelled orders**
+
+###  Delivery & Return Gaps
+
+```
+-- Orders missing delivery completion
+SELECT COUNT(*) AS NullActualDeliveryDate FROM Orders WHERE ActualDeliveryDate IS NULL;
+
+-- Order items with blank return status
+SELECT COUNT(*) AS NullOrBlankReturnStatus
+FROM OrderItems
+WHERE ReturnStatus IS NULL OR RTRIM(LTRIM(ReturnStatus)) = '';
+```
+- **Output: ActualDeliveryDate(57,084 nulls), ReturnStatus(139,105 blanks or nulls). These values suggest many pending deliveries and unprocessed or irrelevant return statuses**
+
+### Duplicate Checks
 
 
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
+```
+-- Check for duplicate OrderIDs
+SELECT OrderID, COUNT(*) AS DuplicateCount
+FROM Orders
+GROUP BY OrderID
+HAVING COUNT(*) > 1;
+```
+- **No duplicates were found. This confirms unique OrderID values**
 
 
 
