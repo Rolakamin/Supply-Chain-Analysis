@@ -471,6 +471,8 @@ HAVING COUNT(*) > 1;
 ```
 - **No duplicates were found. This confirms unique OrderID values**
 
+## Data Analysis
+
 
 
 
