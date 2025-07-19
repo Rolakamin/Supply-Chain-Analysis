@@ -473,6 +473,13 @@ HAVING COUNT(*) > 1;
 
 ## Data Analysis
 
+**Objective 1:** Identify Key Product Availability Gaps
+
+The goal was to identify which products were frequently unavailable, either because they had no stock or were driving a large number of cancellations, particularly affecting Port Harcourt and surrounding areas.
+
+
+
+
 
 
 
