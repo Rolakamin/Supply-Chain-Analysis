@@ -477,6 +477,19 @@ HAVING COUNT(*) > 1;
 
 The goal was to identify which products were frequently unavailable, either because they had no stock or were driving a large number of cancellations, particularly affecting Port Harcourt and surrounding areas.
 
+**Step 1:** 
+
+Querying products with either missing (NULL) or negative stock levels.These were potential stockouts or data quality flags.
+
+```
+-- Identify Products With Low or Negative Stock
+SELECT ProductID, ProductName, StockQuantity, ProductStatus
+FROM Products
+WHERE StockQuantity IS NULL OR StockQuantity < 0;
+```
+
+
+
 
 
 
