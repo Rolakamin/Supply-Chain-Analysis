@@ -495,6 +495,39 @@ WHERE StockQuantity IS NULL OR StockQuantity < 0;
 
 ![Step 1 Stock Issues2](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/step1_stock_issues2.png)
 
+|   | ProductID | ProductName                               | StockQuantity | ProductStatus   |
+|---|-----------|-------------------------------------------|---------------|-----------------|
+| 1 | P0004     | Your Provide Yourself Basic               | NULL          | OutOfStock      |
+| 2 | P0007     | Against So Alone Deluxe                   | NULL          | Discontinued    |
+| 3 | P0008     | Carved Serve Level Measure Eco            | NULL          | Discontinued    |
+| 4 | P0015     | Several Consider Pro                      | NULL          | OutOfStock      |
+| 5 | P0019     | Carved Too Top Quite Else Eco             | NULL          | Coming Soon     |
+| 6 | P0023     | Source Question Plus                      | NULL          | Discontinued    |
+| 7 | P0037     | Against Watch 491                         | NULL          | Active          |
+| 8 | P0038     | Raise Shoulder 899                        | NULL          | OutOfStock      |
+| 9 | P0042     | Left Action Believe Through Eco           | NULL          | Coming Soon     |
+| 10| P0048     | Clearly Move 585                          | NULL          | OutOfStock      |
+| 11| P0077     | Southern Quality Born Deluxe              | NULL          | Active          |
+| 12| P0086     | Adire Executive Word Plus                 | NULL          | Active          |
+| 13| P0133     | You Bad 600                               | NULL          | OutOfStock      |
+| 14| P0142     | Myself Process 279                        | NULL          | Active          |
+| 15| P0149     | Realize Mean Politics Basic               | NULL          | NULL            |
+| 16| P0168     | Adire First Level Pull Basic              | NULL          | Active          |
+| 17| P0194     | Final Sell Father Plus                    | NULL          | OutOfStock      |
+| 18| P0167     | Keep System Plus                          | -48           | Coming Soon     |
+| 19| P0066     | Cost Can Eco                              | -46           | OutOfStock      |
+| 20| P0100     | Economy Build Test Vote 840               | -34           | Coming Soon     |
+| 21| P0195     | Gas Tonight Basic                         | -25           | Discontinued    |
+| 22| P0144     | Hand Sure Eco                             | -22           | Coming Soon     |
+| 23| P0119     | Tough Lawyer Chance 156                   | -19           | Discontinued    |
+| 24| P0186     | Event Detail Box By Basic                 | -15           | Active          |
+| 25| P0002     | International Character Plus              | -11           | Active          |
+| 26| P0016     | Ready Letter Network Really Pro           | -11           | Active          |
+| 27| P0039     | Dream Certainly Manage Rock Plus          | -7            | Coming Soon     |
+| 28| P0184     | Hair Agree Family Week Pro                | -7            | Active          |
+| 29| P0049     | Body Discuss Long Particular Basic        | -4            | Discontinued    |
+
+
 
 
 
