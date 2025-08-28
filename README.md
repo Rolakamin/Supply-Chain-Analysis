@@ -493,7 +493,7 @@ WHERE StockQuantity IS NULL OR StockQuantity < 0;
 ![Step 1 Stock Issues1](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/step1_stock_issues2.png)
 
 
-![Step 1 Stock Issues2](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/step1_stock_issues2.png)
+![Step 1 Stock Issues2](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/step1_%20stock_issues1.png)
 
 |   | ProductID | ProductName                               | StockQuantity | ProductStatus   |
 |---|-----------|-------------------------------------------|---------------|-----------------|
@@ -528,7 +528,7 @@ WHERE StockQuantity IS NULL OR StockQuantity < 0;
 | 29| P0049     | Body Discuss Long Particular Basic        | -4            | Discontinued    |
 
 
- ![](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/step1_stock_issues2.png)
+ 
 
 
 
