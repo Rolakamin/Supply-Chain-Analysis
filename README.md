@@ -527,6 +527,28 @@ WHERE StockQuantity IS NULL OR StockQuantity < 0;
 | 28| P0184     | Hair Agree Family Week Pro                | -7            | Active          |
 | 29| P0049     | Body Discuss Long Particular Basic        | -4            | Discontinued    |
 
+**Step 2:** 
+
+Products with the Highest Number of Cancelled Orders
+Products that appeared most frequently in cancelled orders were identified, regardless of their stock status.
+
+```
+-- Count How Many Times Each Product Appeared in Canceled Orders
+SELECT ProductID, COUNT(*) AS CancelledOrderCount
+FROM Orders o
+JOIN OrderItems oi 
+  ON o.OrderID = oi.OrderID
+WHERE o.OrderStatus = 'Canceled'
+GROUP BY ProductID
+ORDER BY CancelledOrderCount DESC;
+```
+
+**Result:** 109 products were involved in at least one cancellation.
+
+Below is a sample of the top results:
+
+
+
 
  
 
