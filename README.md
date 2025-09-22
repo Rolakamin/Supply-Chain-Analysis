@@ -549,6 +549,31 @@ Below is a sample of the top results:
 
 ![cancelled_order_count](https://github.com/Rolakamin/Supply-Chain-Analysis/commit/c2f8c73ac4eecb1eb388081ba3fe2bdb0faa8b97)
 
+**Step 3:** 
+
+Step 1 and Step 2 results were combined to identify overlapping products, that is, products that were both out of stock (or had negative stock) and frequently cancelled.
+
+```
+-- Identify high-risk products (low stock + high cancellations)
+SELECT
+    p.ProductID,
+    p.ProductName,
+    p.StockQuantity,
+    p.ProductStatus,
+    COALESCE(c.CancelledOrderCount, 0) AS CancelledOrderCount
+FROM Products p
+LEFT JOIN (
+    SELECT oi.ProductID, COUNT(*) AS CancelledOrderCount
+    FROM OrderItems oi
+    JOIN Orders o ON oi.OrderID = o.OrderID
+    WHERE o.OrderStatus = 'Canceled'
+    GROUP BY oi.ProductID
+) c ON p.ProductID = c.ProductID
+WHERE p.StockQuantity IS NULL OR p.StockQuantity <= 0
+ORDER BY CancelledOrderCount DESC;
+```
+
+
 
 
  
