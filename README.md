@@ -548,7 +548,7 @@ ORDER BY CancelledOrderCount DESC;
 
 Below is a sample of the top results:
 
-![cancelled_order_count](https://github.com/Rolakamin/Supply-Chain-Analysis/commit/c2f8c73ac4eecb1eb388081ba3fe2bdb0faa8b97)
+![cancelled_order_count](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/cancelled_order_count.png)
 
 **Step 3:** 
 
