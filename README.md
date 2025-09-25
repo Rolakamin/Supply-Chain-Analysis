@@ -587,6 +587,14 @@ ORDER BY CancelledOrderCount DESC;
 
 **Recommendations**
 
+- Improve inventory tracking to prevent negative stock values
+  
+- Prioritize replenishment of high-demand products frequently driving cancellations.
+
+- Strengthen forecasting for Port Harcourt demand to reduce out-of-stock incidents.
+
+- Engage with suppliers to address products that consistently cause cancellations.
+
 
 
 
