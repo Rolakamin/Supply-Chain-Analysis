@@ -575,6 +575,9 @@ ORDER BY CancelledOrderCount DESC;
 ```
 
 
+![cancelled_order_count](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/cancelled_order_count.png)
+
+
 
 
  
