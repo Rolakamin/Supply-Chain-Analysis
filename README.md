@@ -577,6 +577,17 @@ ORDER BY CancelledOrderCount DESC;
 
 ![cancelled_order_count](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/cancelled_order_count2.png)
 
+**Observations/Insights**
+
+- Several products had NULL or negative stck quantities , yet they still appeared in orders
+
+- The analysis revealed that products like P0002 (International Character Plus) and P0004 (Your Provide Yourself Basic) were frequently cancelled,directly linked to their stock availability.
+
+- Some products were marked as Active in the catalog but had no stock available, creating a mismatch between what customers saw and what could actually be fulfilled, that is, a mismatch between the system and real inventory.
+
+**Recommendations**
+
+
 
 
 
