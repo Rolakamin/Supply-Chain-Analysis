@@ -652,7 +652,7 @@ GROUP BY CustomerCohort;
 Compare delivery delays between new and existing customer cohorts to determine if new customers experience longer delivery times.
 
 **Main Analysis**
-
+```
 SELECT 
     cc.CustomerCohort,
     COUNT(*) AS DeliveredOrders,
@@ -675,13 +675,14 @@ WHERE o.OrderStatus = 'Delivered'
   AND o.OrderDate >= '2024-03-01'
 GROUP BY cc.CustomerCohort
 ORDER BY cc.CustomerCohort;
+```
 
 **Output**
 
-![delay_days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/delay_days.png)
+![delay_days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/avg_min_max_delaydays.png)
 
 **Detailed Distribution Analysis**
-
+```
 SELECT 
     cc.CustomerCohort,
     DATEDIFF(DAY, o.ExpectedDeliveryDate, o.ActualDeliveryDate) AS DelayDays,
@@ -702,10 +703,12 @@ WHERE o.OrderStatus = 'Delivered'
   AND o.OrderDate >= '2024-03-01'
 GROUP BY cc.CustomerCohort, DATEDIFF(DAY, o.ExpectedDeliveryDate, o.ActualDeliveryDate)
 ORDER BY cc.CustomerCohort, DelayDays;
-
+```
 **Output**
 
-![delay_days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/avg_min_max_delaydays.png)
+
+![delay_days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/delay_days.png)
+
 
 
 
