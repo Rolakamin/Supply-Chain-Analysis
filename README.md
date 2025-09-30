@@ -676,9 +676,13 @@ WHERE o.OrderStatus = 'Delivered'
 GROUP BY cc.CustomerCohort
 ORDER BY cc.CustomerCohort;
 
-**Output:**
+**Output**
 
-https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/delay_days.png
+https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/avg_min_max_delaydays.png
+
+![delay_days]()
+
+
 
 
 
