@@ -643,6 +643,9 @@ GROUP BY CustomerCohort;
 ![customer_cohort_count](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/customer_cohort_count.png
 )
 
+- **New Customers (registered after 2024-03-01)**: 10,825 (71.2%)
+- **Existing Customers**: 4,387 (28.8%)
+- **Key Finding**: New customers dominate the customer base, making their experience critical to business success.
 
 
 
