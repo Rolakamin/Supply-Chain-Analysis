@@ -679,7 +679,7 @@ ORDER BY cc.CustomerCohort;
 
 **Output**
 
-![delay_days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/avg_min_max_delaydays.png)
+![avg_min_max_delaydays](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/avg_min_max_delaydays.png)
 
 **Detailed Distribution Analysis**
 ```
@@ -704,10 +704,31 @@ WHERE o.OrderStatus = 'Delivered'
 GROUP BY cc.CustomerCohort, DATEDIFF(DAY, o.ExpectedDeliveryDate, o.ActualDeliveryDate)
 ORDER BY cc.CustomerCohort, DelayDays;
 ```
+
 **Output**
 
-
 ![delay_days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/delay_days.png)
+
+**Findings & Insights**
+
+**No Difference in Delivery Delays:** New and existing customers experience identical delivery performance. Both cohorts show:
+
+**Same average delay** (0 days)
+
+**Same delay range** (-8 to +3 days)
+
+**Same distribution pattern across all delay categories**
+
+**Systemic Delivery Issues**: 46% of all deliveries arrive 1-3 days late, affecting both customer groups equally. This indicates operational challenges in the fulfillment process.
+
+**Key Conclusion:**
+
+Delivery delays do not disproportionately impact new customers. The data shows equal treatment across cohorts, eliminating delivery issues as a cause for any differences in new customer retention.
+
+
+
+
+
 
 
 
