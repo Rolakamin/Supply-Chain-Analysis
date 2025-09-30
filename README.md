@@ -618,6 +618,8 @@ Total Customers Analysed - **15,212**
 
 **Sample**
 
+![customer_cohort](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/customer_cohort.png)
+
 
 ```
 SELECT 
