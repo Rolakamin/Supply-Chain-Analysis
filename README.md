@@ -678,13 +678,7 @@ ORDER BY cc.CustomerCohort;
 
 **Output**
 
-https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/avg_min_max_delaydays.png
-
-![delay_days]()
-
-
-
-
+![delay_days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/delay_days.png)
 
 **Detailed Distribution Analysis**
 
@@ -710,6 +704,9 @@ GROUP BY cc.CustomerCohort, DATEDIFF(DAY, o.ExpectedDeliveryDate, o.ActualDelive
 ORDER BY cc.CustomerCohort, DelayDays;
 
 **Output**
+
+![delay_days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/avg_min_max_delaydays.png)
+
 
 
 
