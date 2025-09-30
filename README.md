@@ -614,6 +614,7 @@ FROM Customers;
 ```
 
 **Output**
+
 Total Customers Analysed - **15,212**
 
 **Sample**
@@ -636,6 +637,10 @@ FROM (
 ) AS cohort_data
 GROUP BY CustomerCohort;
 ```
+
+**Output**
+
+
 
 
 
