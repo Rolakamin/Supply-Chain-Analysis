@@ -715,7 +715,7 @@ ORDER BY cc.CustomerCohort, DelayDays;
 
 **Same average delay** (0 days)
 
-**Same delay range** (-8 to +3 days)
+**Same delay range** (-8 to +3 days) . **-8** -  8 days before expected date,  **+3** - 3 days after expected date(late), **0** - delivery arrived exactly on expected date
 
 **Same distribution pattern across all delay categories**
 
