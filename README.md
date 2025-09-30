@@ -640,6 +640,11 @@ GROUP BY CustomerCohort;
 
 **Output**
 
+![customer_cohort_count](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/customer_cohort_count.png
+)
+
+
+
 
 
 
