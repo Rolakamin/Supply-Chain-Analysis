@@ -596,6 +596,25 @@ ORDER BY CancelledOrderCount DESC;
 - Engage with suppliers to address products that consistently cause cancellations.
 
 
+**Objective 2:** Assess the Impact on Recent Customer Cohorts
+
+The goal was to determine whether fulfillment issues, such as delivery delays or cancellations, affected new customers (registered after March 1, 2024) more than existing ones, and whether these issues reduced repeat purchase rates.
+
+**Step 1**
+Classify **Customers** as **New** and **Existing** customers based on their **RegistrationDate**
+
+**New Customers** - Customers that registered on or after March 1, 2024.
+**Existing Customers** - Customers that registered before March 1, 2024.
+
+```
+SELECT CustomerID,
+       CASE WHEN RegistrationDate >= '2024-03-01' THEN 'New'
+            ELSE 'Existing' END AS CustomerCohort
+FROM Customers;
+```
+
+
+
 
 
 
