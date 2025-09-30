@@ -491,6 +491,7 @@ WHERE StockQuantity IS NULL OR StockQuantity < 0;
 **Result:** 29 products were returned.
 
 ![Step 1 Stock Issues1](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/step1_stock_issues2.png)
+
 ![Step 2 Stock Issues1](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/step1_%20stock_issues1.png)
 
 
@@ -611,6 +612,12 @@ SELECT CustomerID,
             ELSE 'Existing' END AS CustomerCohort
 FROM Customers;
 ```
+
+**Output**
+Total Customers Analysed - **15,212**
+
+**Sample**
+
 
 ```
 SELECT 
