@@ -647,6 +647,68 @@ GROUP BY CustomerCohort;
 - **Existing Customers**: 4,387 (28.8%)
 - **Key Finding**: New customers dominate the customer base, making their experience critical to business success.
 
+**Step 2** - Delivery Delay Analysis
+
+Compare delivery delays between new and existing customer cohorts to determine if new customers experience longer delivery times.
+
+**Main Analysis**
+
+SELECT 
+    cc.CustomerCohort,
+    COUNT(*) AS DeliveredOrders,
+    AVG(DATEDIFF(DAY, o.ExpectedDeliveryDate, o.ActualDeliveryDate)) AS AvgDelayDays,
+    MIN(DATEDIFF(DAY, o.ExpectedDeliveryDate, o.ActualDeliveryDate)) AS MinDelayDays,
+    MAX(DATEDIFF(DAY, o.ExpectedDeliveryDate, o.ActualDeliveryDate)) AS MaxDelayDays
+FROM Orders o
+JOIN (
+    SELECT 
+        CustomerID,
+        CASE 
+            WHEN RegistrationDate >= '2024-03-01' THEN 'New'
+            ELSE 'Existing' 
+        END AS CustomerCohort
+    FROM Customers
+) cc ON o.CustomerID = cc.CustomerID
+WHERE o.OrderStatus = 'Delivered'
+  AND o.ActualDeliveryDate IS NOT NULL
+  AND o.ExpectedDeliveryDate IS NOT NULL
+  AND o.OrderDate >= '2024-03-01'
+GROUP BY cc.CustomerCohort
+ORDER BY cc.CustomerCohort;
+
+**Output:**
+
+
+
+**Detailed Distribution Analysis**
+
+SELECT 
+    cc.CustomerCohort,
+    DATEDIFF(DAY, o.ExpectedDeliveryDate, o.ActualDeliveryDate) AS DelayDays,
+    COUNT(*) AS OrderCount
+FROM Orders o
+JOIN (
+    SELECT 
+        CustomerID,
+        CASE 
+            WHEN RegistrationDate >= '2024-03-01' THEN 'New'
+            ELSE 'Existing' 
+        END AS CustomerCohort
+    FROM Customers
+) cc ON o.CustomerID = cc.CustomerID
+WHERE o.OrderStatus = 'Delivered'
+  AND o.ActualDeliveryDate IS NOT NULL
+  AND o.ExpectedDeliveryDate IS NOT NULL
+  AND o.OrderDate >= '2024-03-01'
+GROUP BY cc.CustomerCohort, DATEDIFF(DAY, o.ExpectedDeliveryDate, o.ActualDeliveryDate)
+ORDER BY cc.CustomerCohort, DelayDays;
+
+**Output**
+
+
+
+
+
 
 
 
