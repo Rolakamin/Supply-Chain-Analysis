@@ -678,6 +678,8 @@ ORDER BY cc.CustomerCohort;
 
 **Output:**
 
+https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/delay_days.png
+
 
 
 **Detailed Distribution Analysis**
