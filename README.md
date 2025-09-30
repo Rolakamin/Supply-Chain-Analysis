@@ -491,12 +491,8 @@ WHERE StockQuantity IS NULL OR StockQuantity < 0;
 **Result:** 29 products were returned.
 
 ![Step 1 Stock Issues1](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/step1_stock_issues2.png)
-![Step 2 Stock Issues1](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/step1_stock_issues2.png)
+![Step 2 Stock Issues1](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/step1_%20stock_issues1.png)
 
-
-
-
-![cancelled_order_count](https://github.com/Rolakamin/Supply-Chain-Analysis/commit/c2f8c73ac4eecb1eb388081ba3fe2bdb0faa8b97)
 
 |   | ProductID | ProductName                               | StockQuantity | ProductStatus   |
 |---|-----------|-------------------------------------------|---------------|-----------------|
