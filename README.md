@@ -753,6 +753,12 @@ GROUP BY cc.CustomerCohort
 ORDER BY cc.CustomerCohort;
 ```
 
+**Output**
+
+![cancellation_rate](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/cancellation_rate_by_cohort.png)
+
+
+
 
 
 
