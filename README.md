@@ -726,6 +726,35 @@ ORDER BY cc.CustomerCohort, DelayDays;
 Delivery delays do not disproportionately impact new customers. The data shows equal treatment across cohorts, eliminating delivery issues as a cause for any differences in new customer retention.
 
 
+**Step 3** — Order Cancellation Rate by Customer Cohort
+
+After assessing delivery delays, the next step was to evaluate whether new customers experienced a higher rate of order cancellations compared to existing customers.
+
+This helps determine whether fulfillment challenges (such as stockouts or logistics inefficiencies) disproportionately affected newly acquired customers.
+
+```
+SELECT 
+    cc.CustomerCohort,
+    COUNT(*) AS TotalOrders,
+    SUM(CASE WHEN o.OrderStatus = 'Canceled' THEN 1 ELSE 0 END) AS CancelledOrders,
+    ROUND(100.0 * SUM(CASE WHEN o.OrderStatus = 'Canceled' THEN 1 ELSE 0 END) / COUNT(*), 2) AS CancellationRatePercent
+FROM Orders o
+JOIN (
+    SELECT 
+        CustomerID,
+        CASE 
+            WHEN RegistrationDate >= '2024-03-01' THEN 'New'
+            ELSE 'Existing' 
+        END AS CustomerCohort
+    FROM Customers
+) cc ON o.CustomerID = cc.CustomerID
+WHERE o.OrderDate >= '2024-03-01'
+GROUP BY cc.CustomerCohort
+ORDER BY cc.CustomerCohort;
+```
+
+
+
 
 
 
