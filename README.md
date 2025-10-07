@@ -757,6 +757,24 @@ ORDER BY cc.CustomerCohort;
 
 ![cancellation_rate](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/cancellation_rate_by_cohort.png)
 
+**Insights**
+
+- Both New and Existing customers show similar cancellation rates , around 22%.
+
+- Existing customers (22.6%) had only a marginally higher cancellation rate than New customers (22.3%).
+
+- This consistency indicates that cancellations are a systemic issue, not isolated to a specific cohort.
+
+Therefore, both customer groups (existing and new)  were equally affected by fulfillment or inventory management inefficiencies.
+
+**Recommendation**
+
+- Improve overall inventory accuracy and fulfillment speed to reduce cancellations across all customers.
+
+- Prioritize transparent communication about stock or delivery issues, especially for new customers.
+
+- Keep tracking product-level cancellations (from Objective 1) to target problem areas more effectively.
+
 
 
 
