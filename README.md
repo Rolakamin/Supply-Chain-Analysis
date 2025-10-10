@@ -619,7 +619,7 @@ Total Customers Analysed - **15,212**
 
 **Sample**
 
-![customer_cohort](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/customer_cohort.png)
+![Customer Cohort](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/customer_cohort.png)
 
 
 ```
@@ -640,7 +640,7 @@ GROUP BY CustomerCohort;
 
 **Output**
 
-![customer_cohort_count](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/customer_cohort_count.png
+![Customer Cohort Count](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/customer_cohort_count.png
 )
 
 - **New Customers (registered after 2024-03-01)**: 10,825 (71.2%)
@@ -679,7 +679,7 @@ ORDER BY cc.CustomerCohort;
 
 **Output**
 
-![avg_min_max_delaydays](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/avg_min_max_delaydays.png)
+![Average Minimum/Maximum Delay Days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/avg_min_max_delaydays.png)
 
 **Detailed Distribution Analysis**
 ```
@@ -707,7 +707,7 @@ ORDER BY cc.CustomerCohort, DelayDays;
 
 **Output**
 
-![delay_days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/delay_days.png)
+![Delay Days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/delay_days.png)
 
 **Findings & Insights**
 
@@ -755,7 +755,7 @@ ORDER BY cc.CustomerCohort;
 
 **Output**
 
-![cancellation_rate](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/cancellation_rate_by_cohort.png)
+![Cancellation Rate](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/cancellation_rate_by_cohort.png)
 
 **Insights**
 
@@ -804,6 +804,10 @@ GROUP BY cc.CustomerCohort
 ORDER BY cc.CustomerCohort;
 ```
 
+**Output**
+
+
+![Repeat Purchase Analysis](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/repeat_purchase_analysis.png)
 
 
 
