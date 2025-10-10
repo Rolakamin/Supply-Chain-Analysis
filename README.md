@@ -806,8 +806,30 @@ ORDER BY cc.CustomerCohort;
 
 **Output**
 
-
 ![Repeat Purchase Analysis](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/repeat_purchase_analysis.png)
+
+ **Findings & Insights**
+
+ - Both cohorts show strong repeat purchase rates exceeding 56%.
+ - New customers have 0.81% higher repeat rate than existing customers.
+ - New customers average nearly 7 orders each despite being recent acquisitions.
+ - Extremely high maximum orders indicate business accounts in both groups.
+
+**Conclusion**
+New customers demonstrate equal (slightly better) loyalty compared to existing customers. Fulfillment issues are not impacting repeat purchase behavior, and new customer retention is strong.
+
+**Overall Conclusion**
+Fulfillment issues (46% late deliveries, 22% cancellations) affect all customers equally 
+and do not disproportionately impact new customers. New customers demonstrate excellent 
+retention with 57.4% repeat purchase rates.
+
+**Recommendations**
+
+ **Operational Improvements**
+- **Address systemic delivery delays** affecting 46% of all orders
+- **Investigate root causes** of the 22% cancellation rate across both cohorts
+- **Improve delivery forecasting** to reduce the -8 to +3 day variance
+
 
 
 
