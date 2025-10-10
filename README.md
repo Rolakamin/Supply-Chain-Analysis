@@ -767,14 +767,42 @@ ORDER BY cc.CustomerCohort;
 
 Therefore, both customer groups (existing and new)  were equally affected by fulfillment or inventory management inefficiencies.
 
-**Recommendation**
+**Step 4** – Repeat Purchase Rate by Customer Cohort
 
-- Improve overall inventory accuracy and fulfillment speed to reduce cancellations across all customers.
+This step evaluates whether new customers (registered after March 1, 2024) were less likely to make repeat purchases compared to existing customers.
+A lower repeat purchase rate among new customers could suggest post-purchase dissatisfaction, possibly linked to fulfillment or service issues.
 
-- Prioritize transparent communication about stock or delivery issues, especially for new customers.
-
-- Keep tracking product-level cancellations (from Objective 1) to target problem areas more effectively.
-
+```
+WITH CustomerOrderCounts AS (
+    SELECT 
+        c.CustomerID,
+        COUNT(o.OrderID) AS OrderCount
+    FROM Customers c
+    JOIN Orders o ON c.CustomerID = o.CustomerID
+    WHERE o.OrderDate >= '2024-03-01'  -- CRITICAL: Only orders in analysis period
+    GROUP BY c.CustomerID
+)
+SELECT 
+    cc.CustomerCohort,
+    COUNT(DISTINCT coc.CustomerID) AS TotalCustomers,
+    COUNT(DISTINCT CASE WHEN coc.OrderCount > 1 THEN coc.CustomerID END) AS RepeatCustomers,
+    ROUND(COUNT(DISTINCT CASE WHEN coc.OrderCount > 1 THEN coc.CustomerID END) * 100.0 / 
+          COUNT(DISTINCT coc.CustomerID), 2) AS RepeatPurchaseRatePercent,
+    ROUND(AVG(coc.OrderCount * 1.0), 2) AS AvgOrdersPerCustomer,
+    MAX(coc.OrderCount) AS MaxOrdersPerCustomer
+FROM CustomerOrderCounts coc
+JOIN (
+    SELECT 
+        CustomerID,
+        CASE 
+            WHEN RegistrationDate >= '2024-03-01' THEN 'New'
+            ELSE 'Existing'
+        END AS CustomerCohort
+    FROM Customers
+) cc ON coc.CustomerID = cc.CustomerID
+GROUP BY cc.CustomerCohort
+ORDER BY cc.CustomerCohort;
+```
 
 
 
