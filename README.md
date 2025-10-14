@@ -906,7 +906,7 @@ ORDER BY CancelRatePercent DESC;
 
 **Output**
 
-![Supplier Delivery Performance](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/supplier_delivery_performance.png)
+![Supplier Cancellation Analysis](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/supplier_cancellation_analysis.png)
 
 **Findings & Insights**
 
