@@ -471,9 +471,9 @@ HAVING COUNT(*) > 1;
 ```
 - **No duplicates were found. This confirms unique OrderID values**
 
-## Data Analysis
+# Data Analysis
 
-**Objective 1:** Identify Key Product Availability Gaps
+## Objective 1: Identify Key Product Availability Gaps
 
 The goal was to identify which products were frequently unavailable, either because they had no stock or were driving a large number of cancellations, particularly affecting Port Harcourt and surrounding areas.
 
@@ -488,7 +488,7 @@ FROM Products
 WHERE StockQuantity IS NULL OR StockQuantity < 0;
 ```
 
-**Result:** 29 products were returned.
+### Output: 29 products were returned.
 
 ![Step 1 Stock Issues1](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/step1_stock_issues2.png)
 
@@ -527,7 +527,7 @@ WHERE StockQuantity IS NULL OR StockQuantity < 0;
 | 28| P0184     | Hair Agree Family Week Pro                | -7            | Active          |
 | 29| P0049     | Body Discuss Long Particular Basic        | -4            | Discontinued    |
 
-**Step 2.2:** 
+## Step 1.2: 
 
 Products with the Highest Number of Cancelled Orders
 Products that appeared most frequently in cancelled orders were identified, regardless of their stock status.
@@ -549,7 +549,7 @@ Below is a sample of the top results:
 
 ![cancelled_order_count](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/cancelled_order_count.png)
 
-**Step 2.3:** 
+## Step 1.3
 
 Step 1 and Step 2 results were combined to identify overlapping products, that is, products that were both out of stock (or had negative stock) and frequently cancelled.
 
@@ -576,7 +576,7 @@ ORDER BY CancelledOrderCount DESC;
 
 ![cancelled_order_count](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/cancelled_order_count2.png)
 
-**Observations/Insights**
+### Findings/Insights
 
 - Several products had NULL or negative stck quantities , yet they still appeared in orders
 
@@ -584,22 +584,14 @@ ORDER BY CancelledOrderCount DESC;
 
 - Some products were marked as Active in the catalog but had no stock available, creating a mismatch between what customers saw and what could actually be fulfilled, that is, a mismatch between the system and real inventory.
 
-**Recommendations**
-
-- Improve inventory tracking to prevent negative stock values
-  
-- Prioritize replenishment of high-demand products frequently driving cancellations.
-
-- Strengthen forecasting for Port Harcourt demand to reduce out-of-stock incidents.
-
-- Engage with suppliers to address products that consistently cause cancellations.
 
 
-**Objective 2:** Assess the Impact on Recent Customer Cohorts
+
+## Objective 2: Assess the Impact on Recent Customer Cohorts
 
 The goal was to determine whether fulfillment issues, such as delivery delays or cancellations, affected new customers (registered after March 1, 2024) more than existing ones, and whether these issues reduced repeat purchase rates.
 
-**Step 2.1** - Customer Cohort Classification
+## Step 2.1 - Customer Cohort Classification
 
 Classify **Customers** as **New** and **Existing** customers based on their **RegistrationDate**, to establish comparison groups.
 
@@ -613,7 +605,7 @@ SELECT CustomerID,
 FROM Customers;
 ```
 
-**Output**
+### Output
 
 Total Customers Analysed - **15,212**
 
@@ -638,7 +630,7 @@ FROM (
 GROUP BY CustomerCohort;
 ```
 
-**Output**
+### Output
 
 ![Customer Cohort Count](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/customer_cohort_count.png
 )
@@ -647,11 +639,10 @@ GROUP BY CustomerCohort;
 - **Existing Customers**: 4,387 (28.8%)
 - **Key Finding**: New customers dominate the customer base, making their experience critical to business success.
 
-**Step 2.2** - Delivery Delay Analysis
+## Step 2.2 - Delivery Delay Analysis
 
 Compare delivery delays between new and existing customer cohorts to determine if new customers experience longer delivery times.
 
-**Main Analysis**
 ```
 SELECT 
     cc.CustomerCohort,
@@ -677,7 +668,7 @@ GROUP BY cc.CustomerCohort
 ORDER BY cc.CustomerCohort;
 ```
 
-**Output**
+### Output
 
 ![Average Minimum/Maximum Delay Days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/avg_min_max_delaydays.png)
 
@@ -705,11 +696,11 @@ GROUP BY cc.CustomerCohort, DATEDIFF(DAY, o.ExpectedDeliveryDate, o.ActualDelive
 ORDER BY cc.CustomerCohort, DelayDays;
 ```
 
-**Output**
+### Output
 
 ![Delay Days](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/delay_days.png)
 
-**Findings & Insights**
+### Findings & Insights
 
 **No Difference in Delivery Delays:** New and existing customers experience identical delivery performance. Both cohorts show:
 
@@ -721,7 +712,7 @@ ORDER BY cc.CustomerCohort, DelayDays;
 
 **Systemic Delivery Issues**: 46% of all deliveries arrive 1-3 days late, affecting both customer groups equally. This indicates operational challenges in the fulfillment process.
 
-**Key Conclusion:**
+### Business Implications
 
 Delivery delays do not disproportionately impact new customers. The data shows equal treatment across cohorts, eliminating delivery issues as a cause for any differences in new customer retention.
 
@@ -753,7 +744,7 @@ GROUP BY cc.CustomerCohort
 ORDER BY cc.CustomerCohort;
 ```
 
-**Output**
+### Output
 
 ![Cancellation Rate](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/cancellation_rate_by_cohort.png)
 
@@ -767,7 +758,7 @@ ORDER BY cc.CustomerCohort;
 
 Therefore, both customer groups (existing and new)  were equally affected by fulfillment or inventory management inefficiencies.
 
-**Step 2.4** – Repeat Purchase Rate by Customer Cohort
+## Step 2.4 – Repeat Purchase Rate by Customer Cohort
 
 This step evaluates whether new customers (registered after March 1, 2024) were less likely to make repeat purchases compared to existing customers.
 A lower repeat purchase rate among new customers could suggest post-purchase dissatisfaction, possibly linked to fulfillment or service issues.
@@ -804,39 +795,31 @@ GROUP BY cc.CustomerCohort
 ORDER BY cc.CustomerCohort;
 ```
 
-**Output**
+### Output
 
 ![Repeat Purchase Analysis](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/repeat_purchase_analysis.png)
 
- **Findings & Insights**
+ ### Findings & Insights
 
  - Both cohorts show strong repeat purchase rates exceeding 56%.
  - New customers have 0.81% higher repeat rate than existing customers.
  - New customers average nearly 7 orders each despite being recent acquisitions.
  - Extremely high maximum orders indicate business accounts in both groups.
 
-**Conclusion**
-New customers demonstrate equal (slightly better) loyalty compared to existing customers. Fulfillment issues are not impacting repeat purchase behavior, and new customer retention is strong.
+### Business Implications
 
-**Overall Conclusion**
 Fulfillment issues (46% late deliveries, 22% cancellations) affect all customers equally 
-and do not disproportionately impact new customers. New customers demonstrate excellent 
-retention with 57.4% repeat purchase rates.
+and do not disproportionately impact new customers.
 
-**Recommendations**
-
- **Operational Improvements**
-- **Address systemic delivery delays** affecting 46% of all orders
-- **Investigate root causes** of the 22% cancellation rate across both cohorts
-- **Improve delivery forecasting** to reduce the -8 to +3 day variance
+New customers demonstrate excellentretention with 57.4% repeat purchase rates.
 
 
-**Objective 3**: Identify Supplier-Related Fulfillment Constraints
+## Objective 3: Identify Supplier-Related Fulfillment Constraints
 
 The goal was to determine which suppliers are consistently linked to fulfillment issues, such as longer delivery times, higher cancellation rates, or potential quality problems (via return trends).
 By identifying underperforming suppliers, the company can improve supply chain efficiency and customer satisfaction.
 
-**Step 3.1**: Supplier Delivery Delays
+## Step 3.1: Supplier Delivery Delays
 
 Identify suppliers with consistently longer delivery times to pinpoint supply chain bottlenecks.
 
@@ -860,12 +843,12 @@ GROUP BY s.SupplierID, s.SupplierName
 ORDER BY AvgDelayDays DESC;
 ```
 
-**Output**
+### Output
 
 ![Supplier Delivery Performance](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/supplier_delivery_performance.png)
 
  
-**Findings & Insights**
+### Findings & Insights
 
 **Systemic Issue**: All suppliers show near-identical late delivery rates (44-48%).
 
@@ -874,7 +857,7 @@ ORDER BY AvgDelayDays DESC;
 **Identical Averages**: All suppliers show 0 average delay days (early/late deliveries cancel out).
 
 
-**Business Implications**
+### Business Implications
 
 **Operational, Not Supplier Issue**: Problem lies in internal processes, not specific suppliers.
 
@@ -883,7 +866,7 @@ ORDER BY AvgDelayDays DESC;
 **Industry Context Needed**: Determine if 45% late delivery rate is industry standard.
 
 
-**Step 3.2**: Supplier Cancellation Analysis
+## Step 3.2: Supplier Cancellation Analysis
 
 Identify suppliers with high order cancellation rates to pinpoint inventory or reliability issues.
 
@@ -904,11 +887,11 @@ HAVING COUNT(o.OrderID) >= 10
 ORDER BY CancelRatePercent DESC;
 ```
 
-**Output**
+### Output
 
 ![Supplier Cancellation Analysis](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/supplier_cancellation_analysis.png)
 
-**Findings & Insights**
+### Findings & Insights
 
 **Uniform Cancellation Rates**: All suppliers show remarkably consistent rates (21.19% - 22.92%)
 
@@ -918,7 +901,7 @@ ORDER BY CancelRatePercent DESC;
 
 
 
-**Business Implications**
+### Business Implications
 
 **Internal Process Review Needed**: Focus on order management and inventory systems
 
@@ -927,7 +910,7 @@ ORDER BY CancelRatePercent DESC;
 **Root Cause Investigation**: Analyze cancellation reasons and customer feedback
 
 
-**Step 3.3**: Supplier Return Analysis
+## Step 3.3: Supplier Return Analysis
 
 Identify suppliers with high return rates to pinpoint potential quality issues or product dissatisfaction.
 
@@ -948,12 +931,12 @@ HAVING COUNT(oi.OrderItemID) >= 50
 ORDER BY ReturnRatePercent DESC;
 ```
 
-**Output**
+### Output
 
 ![Supplier Return Analysis](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/supplier_return_analysis.png)
 
 
-**Findings & Insights**
+### Findings & Insights
 
 **Zero Returns Recorded**: All suppliers show 0% return rates across significant volumes
 
@@ -962,7 +945,7 @@ ORDER BY ReturnRatePercent DESC;
 **Data Verification Needed**: Confirm return tracking system is capturing all returns
 
 
-**Business Implications**
+### Business Implications
 
 **Excellent Supplier Quality**: No quality-related issues detected across supplier base
 
