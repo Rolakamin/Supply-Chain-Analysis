@@ -477,7 +477,7 @@ HAVING COUNT(*) > 1;
 
 The goal was to identify which products were frequently unavailable, either because they had no stock or were driving a large number of cancellations, particularly affecting Port Harcourt and surrounding areas.
 
-**Step 1:** 
+**Step 1.1:** 
 
 Querying products with either missing (NULL) or negative stock levels.These were potential stockouts or data quality flags.
 
@@ -527,7 +527,7 @@ WHERE StockQuantity IS NULL OR StockQuantity < 0;
 | 28| P0184     | Hair Agree Family Week Pro                | -7            | Active          |
 | 29| P0049     | Body Discuss Long Particular Basic        | -4            | Discontinued    |
 
-**Step 2:** 
+**Step 2.2:** 
 
 Products with the Highest Number of Cancelled Orders
 Products that appeared most frequently in cancelled orders were identified, regardless of their stock status.
@@ -549,7 +549,7 @@ Below is a sample of the top results:
 
 ![cancelled_order_count](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/cancelled_order_count.png)
 
-**Step 3:** 
+**Step 2.3:** 
 
 Step 1 and Step 2 results were combined to identify overlapping products, that is, products that were both out of stock (or had negative stock) and frequently cancelled.
 
@@ -599,7 +599,7 @@ ORDER BY CancelledOrderCount DESC;
 
 The goal was to determine whether fulfillment issues, such as delivery delays or cancellations, affected new customers (registered after March 1, 2024) more than existing ones, and whether these issues reduced repeat purchase rates.
 
-**Step 1** - Customer Cohort Classification
+**Step 2.1** - Customer Cohort Classification
 
 Classify **Customers** as **New** and **Existing** customers based on their **RegistrationDate**, to establish comparison groups.
 
@@ -647,7 +647,7 @@ GROUP BY CustomerCohort;
 - **Existing Customers**: 4,387 (28.8%)
 - **Key Finding**: New customers dominate the customer base, making their experience critical to business success.
 
-**Step 2** - Delivery Delay Analysis
+**Step 2.2** - Delivery Delay Analysis
 
 Compare delivery delays between new and existing customer cohorts to determine if new customers experience longer delivery times.
 
@@ -726,7 +726,7 @@ ORDER BY cc.CustomerCohort, DelayDays;
 Delivery delays do not disproportionately impact new customers. The data shows equal treatment across cohorts, eliminating delivery issues as a cause for any differences in new customer retention.
 
 
-**Step 3** — Order Cancellation Rate by Customer Cohort
+**Step 2.3** — Order Cancellation Rate by Customer Cohort
 
 After assessing delivery delays, the next step was to evaluate whether new customers experienced a higher rate of order cancellations compared to existing customers.
 
@@ -767,7 +767,7 @@ ORDER BY cc.CustomerCohort;
 
 Therefore, both customer groups (existing and new)  were equally affected by fulfillment or inventory management inefficiencies.
 
-**Step 4** – Repeat Purchase Rate by Customer Cohort
+**Step 2.4** – Repeat Purchase Rate by Customer Cohort
 
 This step evaluates whether new customers (registered after March 1, 2024) were less likely to make repeat purchases compared to existing customers.
 A lower repeat purchase rate among new customers could suggest post-purchase dissatisfaction, possibly linked to fulfillment or service issues.
@@ -830,6 +830,36 @@ retention with 57.4% repeat purchase rates.
 - **Investigate root causes** of the 22% cancellation rate across both cohorts
 - **Improve delivery forecasting** to reduce the -8 to +3 day variance
 
+
+**Objective 3**: Identify Supplier-Related Fulfillment Constraints
+
+The goal was to determine which suppliers are consistently linked to fulfillment issues, such as longer delivery times, higher cancellation rates, or potential quality problems (via return trends).
+By identifying underperforming suppliers, the company can improve supply chain efficiency and customer satisfaction.
+
+**Step 3.1**: Supplier Delivery Delays
+
+```
+SELECT 
+    s.SupplierID,
+    s.SupplierName,
+    COUNT(o.OrderID) AS TotalOrders,
+    AVG(DATEDIFF(DAY, o.ExpectedDeliveryDate, o.ActualDeliveryDate)) AS AvgDelayDays,
+    COUNT(CASE WHEN DATEDIFF(DAY, o.ExpectedDeliveryDate, o.ActualDeliveryDate) > 0 THEN 1 END) * 100.0 / COUNT(o.OrderID) AS PercentLateDeliveries
+FROM Orders o
+JOIN OrderItems oi ON o.OrderID = oi.OrderID
+JOIN Products p ON oi.ProductID = p.ProductID
+JOIN Suppliers s ON p.SupplierID = s.SupplierID
+WHERE o.OrderStatus = 'Delivered'
+  AND o.ActualDeliveryDate IS NOT NULL
+  AND o.ExpectedDeliveryDate IS NOT NULL
+  AND o.OrderDate >= '2024-01-01'
+GROUP BY s.SupplierID, s.SupplierName
+ORDER BY AvgDelayDays DESC;
+```
+
+**Output**
+
+![Supplier Delivery Performance](screenshots/supplier_delivery_performance.png)
 
 
 
