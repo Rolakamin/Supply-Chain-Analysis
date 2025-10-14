@@ -950,7 +950,7 @@ ORDER BY ReturnRatePercent DESC;
 
 **Output**
 
-![Supplier Cancellation Analysis](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/supplier_cancellation_analysis.png)
+![Supplier Return Analysis](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/supplier_return_analysis.png)
 
 
 
