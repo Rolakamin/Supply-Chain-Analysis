@@ -978,15 +978,15 @@ Inventory mismatches (29 products with stock issues) create customer disappointm
 
 2. **Address Delivery Operations**
 
-Investigate root causes of 46% late delivery rate
+- Investigate root causes of 46% late delivery rate
 
-Review internal fulfillment workflows
+- Review internal fulfillment workflows
 
 3. **Improve Data Systems**
 
-Audit return tracking (zero returns indicate system gaps)
+- Audit return tracking (zero returns indicate system gaps)
 
-Validate data collection processes
+- Validate data collection processes
 
 4. **Supplier Collaboration** - Joint improvement initiatives
 
