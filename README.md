@@ -838,6 +838,9 @@ By identifying underperforming suppliers, the company can improve supply chain e
 
 **Step 3.1**: Supplier Delivery Delays
 
+Identify suppliers with consistently longer delivery times to pinpoint supply chain bottlenecks.
+
+
 ```
 SELECT 
     s.SupplierID,
@@ -861,6 +864,66 @@ ORDER BY AvgDelayDays DESC;
 
 ![Supplier Delivery Performance](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/supplier_delivery_performance.png)
 
+ 
+**Findings & Insights**
+
+**Systemic Issue**: All suppliers show near-identical late delivery rates (44-48%).
+
+**No Outliers**: No single supplier performs significantly worse than others.
+
+**Identical Averages**: All suppliers show 0 average delay days (early/late deliveries cancel out).
+
+
+**Business Implications**
+
+**Operational, Not Supplier Issue**: Problem lies in internal processes, not specific suppliers.
+
+**Need Process Review**: Focus on internal fulfillment and logistics operations.
+
+**Industry Context Needed**: Determine if 45% late delivery rate is industry standard.
+
+
+**Step 3.2**: Supplier Cancellation Analysis
+
+Identify suppliers with high order cancellation rates to pinpoint inventory or reliability issues.
+
+```
+SELECT 
+    s.SupplierID,
+    s.SupplierName,
+    COUNT(o.OrderID) AS TotalOrders,
+    COUNT(CASE WHEN o.OrderStatus = 'Canceled' THEN 1 END) AS CanceledOrders,
+    COUNT(CASE WHEN o.OrderStatus = 'Canceled' THEN 1 END) * 100.0 / COUNT(o.OrderID) AS CancelRatePercent
+FROM Orders o
+JOIN OrderItems oi ON o.OrderID = oi.OrderID
+JOIN Products p ON oi.ProductID = p.ProductID
+JOIN Suppliers s ON p.SupplierID = s.SupplierID
+WHERE o.OrderDate >= '2024-01-01'
+GROUP BY s.SupplierID, s.SupplierName
+HAVING COUNT(o.OrderID) >= 10
+ORDER BY CancelRatePercent DESC;
+```
+
+**Output**
+
+![Supplier Delivery Performance](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/supplier_delivery_performance.png)
+
+**Findings & Insights**
+
+**Uniform Cancellation Rates**: All suppliers show remarkably consistent rates (21.19% - 22.92%)
+
+**No Outlier Suppliers**: No single supplier performs significantly worse than others
+
+**Systemic Pattern**: Confirms company-wide operational issue, not supplier-specific problems
+
+
+**Business Implications**
+
+**Internal Process Review Needed**: Focus on order management and inventory systems
+
+**Supplier Relationships Secure**: No need to replace underperforming suppliers
+
+**Root Cause Investigation**: Analyze cancellation reasons and customer feedback
 
 
 
