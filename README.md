@@ -917,6 +917,7 @@ ORDER BY CancelRatePercent DESC;
 **Systemic Pattern**: Confirms company-wide operational issue, not supplier-specific problems
 
 
+
 **Business Implications**
 
 **Internal Process Review Needed**: Focus on order management and inventory systems
@@ -924,6 +925,32 @@ ORDER BY CancelRatePercent DESC;
 **Supplier Relationships Secure**: No need to replace underperforming suppliers
 
 **Root Cause Investigation**: Analyze cancellation reasons and customer feedback
+
+
+**Step 3.3**: Supplier Return Analysis
+
+Identify suppliers with high return rates to pinpoint potential quality issues or product dissatisfaction.
+
+```
+SELECT 
+    s.SupplierID,
+    s.SupplierName,
+    COUNT(oi.OrderItemID) AS TotalItemsSold,
+    COUNT(CASE WHEN oi.ReturnStatus = 'Returned' THEN 1 END) AS ReturnedItems,
+    COUNT(CASE WHEN oi.ReturnStatus = 'Returned' THEN 1 END) * 100.0 / COUNT(oi.OrderItemID) AS ReturnRatePercent
+FROM OrderItems oi
+JOIN Orders o ON oi.OrderID = o.OrderID  -- Added this join
+JOIN Products p ON oi.ProductID = p.ProductID
+JOIN Suppliers s ON p.SupplierID = s.SupplierID
+WHERE o.OrderDate >= '2024-01-01'  -- Now using o.OrderDate from Orders table
+GROUP BY s.SupplierID, s.SupplierName
+HAVING COUNT(oi.OrderItemID) >= 50
+ORDER BY ReturnRatePercent DESC;
+```
+
+**Output**
+
+![Supplier Cancellation Analysis](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/supplier_cancellation_analysis.png)
 
 
 
