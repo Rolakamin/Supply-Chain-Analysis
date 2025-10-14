@@ -859,7 +859,7 @@ ORDER BY AvgDelayDays DESC;
 
 **Output**
 
-![Supplier Delivery Performance](screenshots/supplier_delivery_performance.png)
+![Supplier Delivery Performance](https://github.com/Rolakamin/Supply-Chain-Analysis/blob/main/supplier_delivery_performance.png)
 
 
 
